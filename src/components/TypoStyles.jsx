@@ -1,17 +1,17 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export const Title = ({ children }) => {
+export const Title = ({ children, sx }) => {
+  const combinedSx = {
+    ...sx,
+    marginX: '10px'
+  }
   return (
-    <Typography
-      fontSize={20}
-      lineHeight={2}
-      fontWeight="bold"
-      component="p"
-      sx={{ marginX: '10px' }}
-    >
-      {children}
-    </Typography>
+    <Box>
+      <Typography fontSize={20} lineHeight={2} fontWeight="bold" component="span" sx={combinedSx}>
+        {children}
+      </Typography>
+    </Box>
   )
 }
 
