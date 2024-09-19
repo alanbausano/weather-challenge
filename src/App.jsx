@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { WeatherProvider } from './context/WeatherContext'
 import { Details } from './pages/Details'
 import { Favorites } from './pages/Favorites'

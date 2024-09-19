@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import React, { useContext } from 'react'
 import WeatherCard from '../components/WeatherCard'
 import { WeatherContext } from '../context/WeatherContext'

@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import { SearchBar } from './SearchBar'
 import { Button } from '@mui/joy'
-import { ArrowRightAlt, FavoriteBorder } from '@mui/icons-material'
+import { FavoriteBorder } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 
 export const Header = ({ handleSubmit, city, setCity }) => {
