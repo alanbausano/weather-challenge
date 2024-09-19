@@ -1,14 +1,20 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export const Title = ({ children, sx }) => {
+export const Title = ({ children, sx, fontSize }) => {
   const combinedSx = {
     ...sx,
     marginX: '10px'
   }
   return (
     <Box>
-      <Typography fontSize={20} lineHeight={2} fontWeight="bold" component="span" sx={combinedSx}>
+      <Typography
+        fontSize={fontSize || 20}
+        lineHeight={2}
+        fontWeight="bold"
+        component="span"
+        sx={combinedSx}
+      >
         {children}
       </Typography>
     </Box>

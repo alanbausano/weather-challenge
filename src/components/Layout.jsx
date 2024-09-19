@@ -1,58 +1,50 @@
 import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
-import React from 'react'
-import { SearchBar } from './SearchBar'
-import { Button } from '@mui/joy'
-import { ArrowRightAlt } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Header } from './Header'
+import { WeatherContext } from '../context/WeatherContext'
 
 export const Layout = ({ children, handleSubmit, city, setCity }) => {
-  const theme = useTheme()
-  const xxl = '1920'
-  const mdToXxl = useMediaQuery(theme.breakpoints.between('md', xxl))
+  const { favorites } = useContext(WeatherContext)
 
+  const location = useLocation()
+  const theme = useTheme()
+  const isHome = location.pathname === '/'
+
+  const isXl = useMediaQuery(theme.breakpoints.up('xl'))
+  const isLg = useMediaQuery(theme.breakpoints.between('lg', 'xl'))
+  const isMd = useMediaQuery(theme.breakpoints.between('md', 'lg'))
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'))
   return (
     <>
-      {mdToXxl ? (
-        <Container maxWidth="xl">
-          <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3, width: '100%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <SearchBar handleSubmit={handleSubmit} city={city} setCity={setCity} />
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'end',
-                alignItems: 'center',
-                marginLeft: 10
-              }}
-            >
-              <Link to="/favorites">
-                <Button>
-                  See your favorite cities
-                  <ArrowRightAlt />
-                </Button>
-              </Link>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              height: '100%',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center'
-            }}
-          >
-            {children}
-          </Box>
-        </Container>
-      ) : (
-        <Container maxWidth="sm">
-          <SearchBar handleSubmit={handleSubmit} city={city} setCity={setCity} />
-
-          <Box sx={{ margin: '30px' }}>{children}</Box>
-        </Container>
-      )}
+      <Container maxWidth={isXl ? 'xl' : isLg ? 'lg' : 'sm'}>
+        {isHome && <Header handleSubmit={handleSubmit} city={city} setCity={setCity} />}
+        <Box
+          sx={{
+            height: '100%',
+            width: '100%',
+            display: 'grid',
+            gridTemplateColumns:
+              isHome || !favorites.length
+                ? null
+                : isXl
+                  ? 'repeat(5, 1fr)'
+                  : isLg
+                    ? 'repeat(4, 1fr)'
+                    : isMd
+                      ? 'repeat(2, 1fr)'
+                      : isSm
+                        ? 'repeat(1, 1fr)'
+                        : 'repeat(2, 1fr)',
+            gap: '1.5rem',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px'
+          }}
+        >
+          {children}
+        </Box>
+      </Container>
     </>
   )
 }

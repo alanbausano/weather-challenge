@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useWeather } from '../hooks/useWeather'
 import { Layout } from '../components/Layout'
 import WeatherCard from '../components/WeatherCard'
@@ -20,8 +20,21 @@ export const Home = () => {
   return (
     <Layout city={city} setCity={setCity} handleSubmit={handleSubmit}>
       {!data && !isLoading && (
-        <Box>
-          <Title sx={{ color: 'rgb(190, 190, 190)', fontWeight: '5px' }}>
+        <Box
+          sx={{
+            color: 'green',
+            fontWeight: '5px',
+            width: '100%'
+          }}
+        >
+          <Title
+            sx={{
+              color: 'rgb(190, 190, 190)',
+              fontWeight: '5px',
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
             No cities provided yet, try searching for one.
           </Title>
         </Box>
@@ -33,12 +46,22 @@ export const Home = () => {
       )}
       {error && (
         <>
-          <Title>City not found</Title>
+          <Title
+            sx={{
+              color: 'rgb(169, 46, 46)',
+              fontWeight: '8px',
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            City not found
+          </Title>
           <Notification open={!!error} />
         </>
       )}
       {data && (
         <WeatherCard
+          id={data?.location.localtime_epoch}
           country={data?.location?.country}
           city={data?.location?.name}
           humidity={data?.current?.humidity}
