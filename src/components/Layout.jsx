@@ -28,7 +28,7 @@ export const Layout = ({ children, handleSubmit, city, setCity }) => {
               isHome || !favorites.length
                 ? null
                 : isXl
-                  ? 'repeat(5, 1fr)'
+                  ? 'repeat(4, 1fr)'
                   : isLg
                     ? 'repeat(4, 1fr)'
                     : isMd

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useWeather } from '../hooks/useWeather'
 import { Layout } from '../components/Layout'
 import WeatherCard from '../components/WeatherCard'
@@ -6,11 +6,13 @@ import { Box, CircularProgress } from '@mui/material'
 import { Notification } from '../components/Notification'
 import { Title } from '../components/TypoStyles'
 import { useDebounce } from 'use-debounce'
+import { WeatherContext } from '../context/WeatherContext'
 
 export const Home = () => {
   const [city, setCity] = useState('')
   const [debouncedValue] = useDebounce(city, 500)
   const { data, error, isLoading } = useWeather(debouncedValue)
+  const { toggleFavorites } = useContext(WeatherContext)
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -19,7 +21,7 @@ export const Home = () => {
 
   return (
     <Layout city={city} setCity={setCity} handleSubmit={handleSubmit}>
-      {!data && !isLoading && (
+      {!data && !isLoading && !error && (
         <Box
           sx={{
             color: 'green',
@@ -54,7 +56,7 @@ export const Home = () => {
               justifyContent: 'center'
             }}
           >
-            City not found
+            City not found, try with a different one.
           </Title>
           <Notification open={!!error} />
         </>
@@ -68,6 +70,7 @@ export const Home = () => {
           windVel={data?.current?.wind_kph}
           description={data?.current?.condition?.text}
           icon={data?.current?.condition?.icon}
+          toggleFavorite={toggleFavorites}
         />
       )}
     </Layout>
