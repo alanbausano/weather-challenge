@@ -4,6 +4,8 @@
 
 #### This project is a Weather App built using mainly React, among other libraries. It allows users to search for a city and view detailed weather information. In the details page the user can see a 3 day forecast of the selected city. Users can also add cities to their favorites, view them on a separate page and will persist even if the page is reloaded. It uses the rapidapi and the weatherAPI to gather real information.
 
+#### [Live demo](https://weather-challenge-app.netlify.app/)
+
 ## Technologies
 
 - React
@@ -21,6 +23,12 @@
 
 ```
 git clone https://github.com/alanbausano/weather-challenge.git
+```
+
+#### Install dependencies:
+
+```
+npm install
 ```
 
 #### Before initializing the app, you'll need to create an .env file in the root file of the project (there's an .env-example file for you to copy), to provide the weatherAPI key.
